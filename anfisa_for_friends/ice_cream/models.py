@@ -32,10 +32,14 @@ class Topping(PublishedModel):
 
 
 class Wrapper(PublishedModel):
-    title = models.CharField('Название', max_length=256)
+    title = models.CharField(
+        'Название',
+        max_length=256,
+        help_text='Уникальное название обёртки, не более 256 символов'
+        )
 
     class Meta:
-        verbose_name = 'обертка'
+        verbose_name = 'объект «Обёртка»'
         verbose_name_plural = 'Обёртки'
 
     def __str__(self):
@@ -64,11 +68,16 @@ class IceCream(PublishedModel):
         verbose_name='Топпинги',
         )
     is_on_main = models.BooleanField('На главную', default=False)
+    output_order = models.PositiveSmallIntegerField(
+        default=100,
+        verbose_name='Порядок отображения'
+    )
+    price = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:
         verbose_name = 'мороженное'
         verbose_name_plural = 'Мороженое'
+        ordering = ('output_order', 'title')
 
     def __str__(self):
         return self.title
-    
