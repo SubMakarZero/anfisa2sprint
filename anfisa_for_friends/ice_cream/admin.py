@@ -1,7 +1,5 @@
 from django.contrib import admin
-
 from .models import Category, Topping, Wrapper, IceCream
-
 
 admin.site.empty_value_display = 'Не задано'
 
